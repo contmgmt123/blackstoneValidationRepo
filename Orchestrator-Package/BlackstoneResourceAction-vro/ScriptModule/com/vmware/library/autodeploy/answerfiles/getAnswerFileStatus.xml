@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="getAnswerFileStatus" result-type="string" api-version="6.0.0" id="c84bdb9e-f7fd-45ea-9ca4-89a70d10805a" version="1.0.0" allowed-operations="vfp">
+  <description><![CDATA[Retrieves the answer file associated to a specific ESXi host.]]></description>
+  <param n="adHost" t="AutoDeploy:AutoDeploy"><![CDATA[Auto Deploy host associated to the VC where the target ESXi host is assigned.]]></param>
+  <param n="esxHost" t="AutoDeploy:AutoDeployItem"><![CDATA[ESXi host whose answer file to retrieve.]]></param>
+  <script encoded="false"><![CDATA[if (adHost == null || esxHost == null) {
+	return null;
+}
+System.log("Invoking Action 'Get Answer File status'...");
+return adHost.getAnswerFileStatus(esxHost);]]></script>
+</dunes-script-module>

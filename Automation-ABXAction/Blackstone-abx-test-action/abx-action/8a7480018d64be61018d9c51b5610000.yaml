@@ -1,0 +1,52 @@
+name: Blackstone-abx-test-action
+createdMillis: 1707724617068
+updatedMillis: 1707724617068
+metadata:
+  actionIsRetriable: false
+runtime: python
+source: |
+  def handler(context, inputs):
+      """Set a name for a machine
+
+      :param inputs
+      :param inputs.resourceNames: Contains the original name of the machine.
+             It is supplied from the event data during actual provisioning
+             or from user input for testing purposes.
+      :param inputs.newName: The new machine name to be set.
+      :return The desired machine name.
+      """
+      old_name = inputs["resourceNames"][0]
+      new_name = inputs["newName"]
+
+      outputs = {}
+      outputs["resourceNames"] = inputs["resourceNames"]
+      outputs["resourceNames"][0] = new_name
+
+      print("Setting machine name from {0} to {1}".format(old_name, new_name))
+
+      return outputs
+entrypoint: handler
+description: Creating for blackstone validation
+inputs:
+  newName: new-machine-name
+  resourceNames:
+  - machine-name
+cpuShares: 1024
+memoryInMB: 300
+showMemoryAlert: false
+timeoutSeconds: 600
+deploymentTimeoutSeconds: 900
+actionType: SCRIPT
+provider: ''
+configuration:
+  const_azure-system_managed_identity: false
+system: false
+shared: false
+asyncDeployed: false
+runtimeVersion: '3.10'
+id: 8a7480018d64be61018d9c51b5610000
+orgId: 7bb4d8c3-a407-4f4e-9709-f17126cb3812
+projectId: 2c15bb34-c04a-47d7-bec8-7733f2445fe9
+selfLink: /abx/api/resources/actions/8a7480018d64be61018d9c51b5610000?projectId=2c15bb34-c04a-47d7-bec8-7733f2445fe9
+projectName: Blackstone-Project
+organizationName: lcm-57-15

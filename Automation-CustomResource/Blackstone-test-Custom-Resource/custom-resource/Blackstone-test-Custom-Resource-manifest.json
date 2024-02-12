@@ -1,0 +1,14 @@
+{
+  "contentName": "Blackstone-test-Custom-Resource",
+  "uniqueId": "ee20e109-ba95-4eea-980a-e0325cf2d4c0",
+  "contentType": "Automation-CustomResource",
+  "keyValues": {"contentEndpointVersion": "8.x"},
+  "descendents": [  {
+    "contentName": "BlackstoneResourceAction-vro",
+    "uniqueId": "BlackstoneResourceAction-vro",
+    "contentType": "Orchestrator-Package",
+    "files": [],
+    "keyValues": {},
+    "descendents": []
+  }]
+}

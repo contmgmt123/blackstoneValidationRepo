@@ -1,0 +1,36 @@
+id: Cloud.vSphere.Machine.custom.blackstoneresourceaction
+name: BlackstoneResourceAction
+displayName: blackstoneResourceAction
+providerName: vro-workflow
+resourceType: Cloud.vSphere.Machine
+status: RELEASED
+projectId: 2c15bb34-c04a-47d7-bec8-7733f2445fe9
+orgId: 7bb4d8c3-a407-4f4e-9709-f17126cb3812
+runnableItem:
+  id: BD808080808080808080808080808080F0C280800122528313869552e41805bb1
+  name: Rename virtual machine
+  description: Renames an existing virtual machine on vCenter Server or ESX host and
+    not on the datastore.
+  type: vro.workflow
+  inputParameters:
+  - type: VC:VirtualMachine
+    name: vm
+    description: Virtual machine to rename
+  - type: string
+    name: newName
+    description: New virtual machine name
+  endpointLink: /resources/endpoints/ec3cb252-227d-4642-a241-eeb357ba637a
+formDefinition:
+  tenant: 7bb4d8c3-a407-4f4e-9709-f17126cb3812
+  id: dc8048d2-6b1c-41fc-9cf4-fc960f75cc74
+  name: BlackstoneResourceAction
+  form: '{"layout":{"pages":[{"id":"page_1","title":"General","sections":[{"id":"section_0","fields":[{"id":"vm","display":"valuePickerTree"}]},{"id":"section_1","fields":[{"id":"newName","display":"textField"}]}]}]},"schema":{"vm":{"label":"Virtual
+    machine to rename","type":{"dataType":"reference","referenceType":"VC:VirtualMachine","isMultiple":false},"constraints":{"required":true}},"newName":{"label":"New
+    virtual machine name","type":{"dataType":"string","isMultiple":false},"constraints":{"required":true}}}}'
+  sourceType: resource.action
+  sourceId: Cloud.vSphere.Machine.custom.blackstoneresourceaction
+  type: requestForm
+  status: 'ON'
+  formFormat: JSON
+projectName: Blackstone-Project
+organizationName: lcm-57-15

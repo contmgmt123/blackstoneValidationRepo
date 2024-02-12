@@ -1,0 +1,24 @@
+type: INPUT
+id: 4870a897-0cfd-4437-a464-0f44c430aaa1
+createdAt: '2024-02-12T09:05:09.322775Z'
+createdBy: configadmin
+updatedAt: '2024-02-12T09:05:09.322775Z'
+updatedBy: configadmin
+orgId: 7bb4d8c3-a407-4f4e-9709-f17126cb3812
+projectId: 2c15bb34-c04a-47d7-bec8-7733f2445fe9
+projectName: Blackstone-Project
+name: BlackstoneTestPropertyGroup
+description: ''
+properties:
+  DeploymentType:
+    type: array
+    encrypted: false
+    items:
+      type: string
+      encrypted: false
+    title: deploymentType
+    default:
+    - Dev
+    - Staging
+    - Prod
+organizationName: lcm-57-15

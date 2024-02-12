@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="getAutoDeployOptions" result-type="Properties" api-version="6.0.0" id="e509d503-f958-460e-8f47-4ee466c4c385" version="1.0.0" allowed-operations="vfp">
+  <description><![CDATA[Gets Auto Deploy global configuration options.]]></description>
+  <param n="adHost" t="AutoDeploy:AutoDeploy"><![CDATA[Auto Deploy host for which to retrieve the global configuration options.]]></param>
+  <script encoded="false"><![CDATA[if (adHost == null) {
+	throw "Auto Deploy host can not be null!";
+}
+return adHost.getDeployOptions();]]></script>
+</dunes-script-module>

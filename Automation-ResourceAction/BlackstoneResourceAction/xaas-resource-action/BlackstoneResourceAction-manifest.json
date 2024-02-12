@@ -1,0 +1,14 @@
+{
+  "contentName": "BlackstoneResourceAction",
+  "uniqueId": "Cloud.vSphere.Machine.custom.blackstoneresourceaction",
+  "contentType": "Automation-ResourceAction",
+  "keyValues": {"contentEndpointVersion": "8.x"},
+  "descendents": [  {
+    "contentName": "BlackstoneResourceAction-vro",
+    "uniqueId": "BlackstoneResourceAction-vro",
+    "contentType": "Orchestrator-Package",
+    "files": [],
+    "keyValues": {},
+    "descendents": []
+  }]
+}

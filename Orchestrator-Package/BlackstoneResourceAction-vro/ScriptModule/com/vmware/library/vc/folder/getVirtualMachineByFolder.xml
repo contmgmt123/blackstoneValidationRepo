@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dunes-script-module name="getVirtualMachineByFolder" result-type="Array/VC:VirtualMachine" api-version="6.0.0" id="50b17469-ba66-41ea-8f52-b1e62d7273d1" version="1.1.0" allowed-operations="vfp">
+  <description><![CDATA[Get all VMs in a folder that are authorized for the current user.]]></description>
+  <param n="vmFolder" t="VC:VmFolder"><![CDATA[]]></param>
+  <script encoded="false"><![CDATA[if(!vmFolder){
+	throw "UndefinedParameter: vmFolder mandatory input is not defined.";
+}
+return System.filterAuthorized(vmFolder.vm);]]></script>
+</dunes-script-module>

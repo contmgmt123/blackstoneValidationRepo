@@ -1,0 +1,57 @@
+id: 43e8331f-3ebf-4893-9ed4-c9de9e68dbd9
+createdAt: '2024-02-12T08:04:11.468239Z'
+createdBy: configadmin
+updatedAt: '2024-02-12T08:06:43.137905Z'
+updatedBy: configadmin
+orgId: 7bb4d8c3-a407-4f4e-9709-f17126cb3812
+projectId: 2c15bb34-c04a-47d7-bec8-7733f2445fe9
+projectName: Blackstone-Project
+selfLink: /blueprint/api/blueprints/43e8331f-3ebf-4893-9ed4-c9de9e68dbd9
+name: Blackstone-template-test
+description: created for blackstone validation
+status: DRAFT
+content: |
+  ---
+  formatVersion: 1
+  inputs:
+    DeploymentName:
+      type: "string"
+  resources:
+    Cloud_vSphere_Network_1:
+      type: "Cloud.vSphere.Network"
+      metadata:
+        layoutPosition:
+        - 0
+        - 0
+      properties:
+        networkType: "existing"
+    Cloud_vSphere_Machine_1:
+      type: "Cloud.vSphere.Machine"
+      metadata:
+        layoutPosition:
+        - 1
+        - 0
+      properties:
+        image: "centos"
+        cpuCount: 1
+        totalMemoryMB: 1024
+        attachedDisks:
+        - source: "${resource.Cloud_vSphere_Disk_1.id}"
+        networks:
+        - network: "${resource.Cloud_vSphere_Network_1.id}"
+    Cloud_vSphere_Disk_1:
+      type: "Cloud.vSphere.Disk"
+      metadata:
+        layoutPosition:
+        - 1
+        - 1
+      properties:
+        capacityGb: 1
+valid: true
+validationMessages: [
+  ]
+totalVersions: 2
+totalReleasedVersions: 1
+requestScopeOrg: false
+contentSourceSyncMessages: [
+  ]

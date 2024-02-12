@@ -1,0 +1,14 @@
+{
+  "contentName": "Blacksonte-Custom-Form-Template",
+  "uniqueId": "587806c9-83d2-4dce-96fa-a4ff21941948",
+  "contentType": "Automation-CustomForm",
+  "keyValues": {"contentEndpointVersion": "8.x"},
+  "descendents": [  {
+    "contentName": "BlackstoneResourceAction-vro",
+    "uniqueId": "BlackstoneResourceAction-vro",
+    "contentType": "Orchestrator-Package",
+    "files": [],
+    "keyValues": {},
+    "descendents": []
+  }]
+}

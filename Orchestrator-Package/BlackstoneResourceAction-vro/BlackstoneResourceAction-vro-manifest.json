@@ -1,0 +1,7 @@
+{
+  "contentName": "BlackstoneResourceAction-vro",
+  "uniqueId": "BlackstoneResourceAction-vro",
+  "contentType": "Orchestrator-Package",
+  "keyValues": {"contentEndpointVersion": "8.x"},
+  "descendents": []
+}
