@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item0" object-name="Workflow:name=generic" id="BD808080808080808080808080808080C7C280800122528313869552e41805bb1" version="0.2.0" api-version="6.0.0" allowed-operations="vf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Create resource pool]]></display-name>
+  <description><![CDATA[Creates a resource pool with the default CPU and memory allocation values. 
+To create a resource pool in a cluster, the cluster must have VMware DRS enabled.]]></description>
+  <ref-types><![CDATA[(VC:ResourcePool)]]></ref-types>
+  <position y="20.0" x="180.0"/>
+  <input>
+    <param name="resourcePool" type="VC:ResourcePool">
+      <description><![CDATA[Parent resource pool folder]]></description>
+    </param>
+    <param name="name" type="string">
+      <description><![CDATA[Name of new resource pool]]></description>
+    </param>
+  </input>
+  <output>
+    <param name="newResourcePool" type="VC:ResourcePool">
+      <description><![CDATA[The newly created resource pool]]></description>
+    </param>
+  </output>
+  <workflow-item name="item1" type="end" end-mode="0">
+    <position y="150.0" x="180.0"/>
+  </workflow-item>
+  <workflow-item name="item0" out-name="item1" type="link" linked-workflow-id="BD80808080808080808080808080808043C180800122528313869552e41805bb1">
+    <display-name><![CDATA[Create resource pool]]></display-name>
+    <in-binding>
+      <bind name="resourcePool" type="VC:ResourcePool" export-name="resourcePool">
+        <description><![CDATA[The parent of the new Resource Pool]]></description>
+      </bind>
+      <bind name="name" type="string" export-name="name">
+        <description><![CDATA[Name of the new Resource Pool]]></description>
+      </bind>
+      <bind name="cpuAllocationExpandableReservation" type="boolean" explicitly-not-bound="true">
+        <description><![CDATA[If true,  the reservation on a resource pool can grow beyond the specified value. Null for default value]]></description>
+      </bind>
+      <bind name="cpuAllocationLimit" type="number" explicitly-not-bound="true">
+        <description><![CDATA[The utilization of a resource pool will not exceed this limit, even if there are available resources. Null to disable this limit]]></description>
+      </bind>
+      <bind name="cpuAllocationReservation" type="number" explicitly-not-bound="true">
+        <description><![CDATA[Amount of resource that is guaranteed available to the resource pool. Null for no reservation]]></description>
+      </bind>
+      <bind name="cpuAllocationSharesLevel" type="string" explicitly-not-bound="true">
+        <description><![CDATA[The allocation level. Null for default value]]></description>
+      </bind>
+      <bind name="cpuAllocationSharesShares" type="number" explicitly-not-bound="true">
+        <description><![CDATA[The number of shares allocated. This value is only set if level is set to custom. Null for default value]]></description>
+      </bind>
+      <bind name="memoryAllocationExpandableReservation" type="boolean" explicitly-not-bound="true">
+        <description><![CDATA[If true,  the reservation on a resource pool can grow beyond the specified value. Null for default value]]></description>
+      </bind>
+      <bind name="memoryAllocationLimit" type="number" explicitly-not-bound="true">
+        <description><![CDATA[The utilization of a resource pool will not exceed this limit, even if there are available resources. Null to disable this limit]]></description>
+      </bind>
+      <bind name="memoryAllocationReservation" type="number" explicitly-not-bound="true">
+        <description><![CDATA[Amount of resource that is guaranteed available to the resource pool. Null for no reservation]]></description>
+      </bind>
+      <bind name="memoryAllocationSharesLevel" type="string" explicitly-not-bound="true">
+        <description><![CDATA[The allocation level. Null for default value]]></description>
+      </bind>
+      <bind name="memoryAllocationSharesShares" type="number" explicitly-not-bound="true">
+        <description><![CDATA[The number of shares allocated. This value is only set if level is set to custom. Null for default value]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="newResourcePool" type="VC:ResourcePool" export-name="newResourcePool">
+        <description><![CDATA[If no errors, contains the newly created resource pool]]></description>
+      </bind>
+    </out-binding>
+    <position y="100.0" x="140.0"/>
+  </workflow-item>
+  <presentation>
+    <p-step>
+      <title><![CDATA[General informations]]></title>
+      <p-param name="resourcePool">
+        <desc><![CDATA[Parent resource pool folder]]></desc>
+        <p-qual name="show-select-as"><![CDATA[tree]]></p-qual>
+        <p-qual name="contextualParameter"><![CDATA[]]></p-qual>
+        <p-qual name="mandatory"><![CDATA[true]]></p-qual>
+      </p-param>
+      <p-param name="name">
+        <desc><![CDATA[Name of new resource pool]]></desc>
+        <p-qual name="mandatory"><![CDATA[true]]></p-qual>
+        <p-qual name="minStringLength"><![CDATA[1.0]]></p-qual>
+      </p-param>
+    </p-step>
+  </presentation>
+</workflow>

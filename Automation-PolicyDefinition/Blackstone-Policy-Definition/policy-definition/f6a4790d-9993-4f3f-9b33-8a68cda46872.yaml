@@ -1,0 +1,21 @@
+id: f6a4790d-9993-4f3f-9b33-8a68cda46872
+name: Blackstone-Policy-Definition
+typeId: com.vmware.policy.catalog.entitlement
+enforcementType: HARD
+orgId: 7bb4d8c3-a407-4f4e-9709-f17126cb3812
+projectId: 2c15bb34-c04a-47d7-bec8-7733f2445fe9
+createdAt: '2024-02-12T09:01:08.324568Z'
+createdBy: configadmin
+lastUpdatedAt: '2024-02-12T09:01:08.324568Z'
+lastUpdatedBy: configadmin
+projectName: Blackstone-Project
+organizationName: lcm-57-15
+definition:
+  entitledUsers:
+  - userType: USER
+    principals:
+    - type: PROJECT
+      referenceId: ''
+    items:
+    - id: Blackstone-Test-Content-Source
+      type: CATALOG_SOURCE_IDENTIFIER

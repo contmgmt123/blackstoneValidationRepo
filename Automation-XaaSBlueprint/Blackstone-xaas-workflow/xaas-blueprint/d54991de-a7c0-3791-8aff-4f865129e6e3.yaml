@@ -1,0 +1,26 @@
+id: d54991de-a7c0-3791-8aff-4f865129e6e3
+name: Blackstone-xaas-workflow
+type:
+  id: com.vmw.vro.workflow
+  link: /catalog/api/types/com.vmw.vro.workflow
+  name: Automation Orchestrator Workflow
+createdAt: '2024-02-12T09:26:36.806681Z'
+createdBy: configadmin
+lastUpdatedAt: '2024-02-12T09:26:36.806681Z'
+schema:
+  type: object
+  properties:
+    DeploymentName:
+      type: string
+      title: DeploymentName
+    DeploymentType:
+      type: string
+      title: DeploymentType
+  required: [
+    ]
+bulkRequestLimit: 1
+formId: 29247642-bef3-4767-b473-4b7700bdc127
+externalId: 35ec0169-41aa-47bc-896f-79622cbef2ca
+sourceId: 78f34d96-2ea4-46eb-a802-394d6fdd76d5
+sourceName: Blackstone-xaas-source
+workflowId: 35ec0169-41aa-47bc-896f-79622cbef2ca

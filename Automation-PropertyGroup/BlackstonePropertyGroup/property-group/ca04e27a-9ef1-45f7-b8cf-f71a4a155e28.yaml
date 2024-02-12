@@ -1,0 +1,17 @@
+type: CONSTANT
+id: ca04e27a-9ef1-45f7-b8cf-f71a4a155e28
+createdAt: '2024-02-01T14:52:39.446872Z'
+createdBy: configadmin
+updatedAt: '2024-02-01T14:52:39.446872Z'
+updatedBy: configadmin
+orgId: 7bb4d8c3-a407-4f4e-9709-f17126cb3812
+projectId: cc8a5900-0960-4aa9-8626-d82210709d4b
+projectName: Blackstone-custom-form-project
+name: BlackstonePropertyGroup
+description: ''
+properties:
+  Name:
+    type: string
+    encrypted: false
+    const: Blacstone-Group
+organizationName: lcm-57-15

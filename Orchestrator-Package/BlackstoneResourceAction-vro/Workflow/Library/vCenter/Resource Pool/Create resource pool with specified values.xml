@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item0" object-name="Workflow:name=generic" id="BD80808080808080808080808080808043C180800122528313869552e41805bb1" version="0.2.0" api-version="6.0.0" allowed-operations="vf" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Create resource pool with specified values]]></display-name>
+  <description><![CDATA[Creates a resource pool with CPU and memory allocation values that you specify. To create a resource pool in a cluster, the cluster must have VMware DRS enabled.]]></description>
+  <ref-types><![CDATA[(VC:ResourcePool)]]></ref-types>
+  <position y="20.0" x="180.0"/>
+  <input>
+    <param name="resourcePool" type="VC:ResourcePool">
+      <description><![CDATA[Parent resource pool folder]]></description>
+    </param>
+    <param name="name" type="string">
+      <description><![CDATA[Name of new resource pool]]></description>
+    </param>
+    <param name="cpuAllocationExpandableReservation" type="boolean">
+      <description><![CDATA[If true, the reservation on a resource pool can grow beyond the specified value. Null for default value.]]></description>
+    </param>
+    <param name="cpuAllocationLimit" type="number">
+      <description><![CDATA[The utilization of this resource pool will not exceed this limit, even if there are available resources. Null to disable this limit.]]></description>
+    </param>
+    <param name="cpuAllocationReservation" type="number">
+      <description><![CDATA[Specifies a guaranteed CPU allocation for this resource pool. Null for no reservation.]]></description>
+    </param>
+    <param name="cpuAllocationSharesLevel" type="VC:SharesLevel">
+      <description><![CDATA[The shares allocation level. Null for default value.]]></description>
+    </param>
+    <param name="cpuAllocationSharesShares" type="number">
+      <description><![CDATA[The number of CPU shares allocated. This value is only set if shares allocation level is set to custom. Null for default value.]]></description>
+    </param>
+    <param name="memoryAllocationExpandableReservation" type="boolean">
+      <description><![CDATA[If true, the reservation on a resource pool can grow beyond the specified value. Null for default value.]]></description>
+    </param>
+    <param name="memoryAllocationLimit" type="number">
+      <description><![CDATA[The utilization of this resource pool will not exceed this limit, even if there are available resources. Null to disable this limit.]]></description>
+    </param>
+    <param name="memoryAllocationReservation" type="number">
+      <description><![CDATA[Specifies a guaranteed memory allocation for this resource pool. Null for no reservation.]]></description>
+    </param>
+    <param name="memoryAllocationSharesLevel" type="VC:SharesLevel">
+      <description><![CDATA[The memory allocation level. Null for default value.]]></description>
+    </param>
+    <param name="memoryAllocationSharesShares" type="number">
+      <description><![CDATA[The number of shares allocated. This value is only set if memory allocation level is set to custom. Null for default value.]]></description>
+    </param>
+  </input>
+  <output>
+    <param name="newResourcePool" type="VC:ResourcePool">
+      <description><![CDATA[The newly created resource pool]]></description>
+    </param>
+  </output>
+  <workflow-item name="item1" type="end" end-mode="0">
+    <position y="150.0" x="180.0"/>
+  </workflow-item>
+  <workflow-item name="item0" out-name="item1" type="task">
+    <display-name><![CDATA[Create ressouce pool]]></display-name>
+    <script encoded="false"><![CDATA[if (resourcePool == null) {
+	throw "ReferenceError: Resource pool may not be null";
+}
+else if (name == null || name == "") {
+	throw "ReferenceError: Name may not be null";
+}
+else {
+	var resourceConfigSpec = new VcResourceConfigSpec();
+	
+	// CPU Allocation
+	resourceConfigSpec.cpuAllocation = new VcResourceAllocationInfo();
+	if (cpuAllocationExpandableReservation != null)
+		resourceConfigSpec.cpuAllocation.expandableReservation = cpuAllocationExpandableReservation;
+	else
+		resourceConfigSpec.cpuAllocation.expandableReservation = true;
+	if (cpuAllocationLimit != null)
+		resourceConfigSpec.cpuAllocation.limit = cpuAllocationLimit;		
+	else 
+		resourceConfigSpec.cpuAllocation.limit = -1;
+	if (cpuAllocationReservation != null)
+		resourceConfigSpec.cpuAllocation.reservation = cpuAllocationReservation;
+	else
+		resourceConfigSpec.cpuAllocation.reservation = 0;
+	resourceConfigSpec.cpuAllocation.shares = new VcSharesInfo();
+	if (cpuAllocationSharesLevel != null)
+		resourceConfigSpec.cpuAllocation.shares.level = VcSharesLevel.fromString(cpuAllocationSharesLevel.name);
+	else
+		resourceConfigSpec.cpuAllocation.shares.level = VcSharesLevel.normal;
+	if (cpuAllocationSharesShares != null)
+		resourceConfigSpec.cpuAllocation.shares.shares = cpuAllocationSharesShares;
+	else
+		resourceConfigSpec.cpuAllocation.shares.shares = 0; // ingored
+	
+//		Memory allocation
+	resourceConfigSpec.memoryAllocation = new VcResourceAllocationInfo();
+	if (memoryAllocationExpandableReservation != null)
+		resourceConfigSpec.memoryAllocation.expandableReservation = memoryAllocationExpandableReservation;
+	else
+		resourceConfigSpec.memoryAllocation.expandableReservation = true;
+	if (memoryAllocationLimit != null)
+		resourceConfigSpec.memoryAllocation.limit = memoryAllocationLimit;		
+	else 
+		resourceConfigSpec.memoryAllocation.limit = -1;
+	if (memoryAllocationReservation != null)
+		resourceConfigSpec.memoryAllocation.reservation = memoryAllocationReservation;
+	else
+		resourceConfigSpec.memoryAllocation.reservation = 0;
+	resourceConfigSpec.memoryAllocation.shares = new VcSharesInfo();
+	if (memoryAllocationSharesLevel != null)
+		resourceConfigSpec.memoryAllocation.shares.level = VcSharesLevel.fromString(memoryAllocationSharesLevel.name);
+	else
+		resourceConfigSpec.memoryAllocation.shares.level = VcSharesLevel.normal;
+	if (memoryAllocationSharesShares != null)
+		resourceConfigSpec.memoryAllocation.shares.shares = memoryAllocationSharesShares;
+	else
+		resourceConfigSpec.memoryAllocation.shares.shares = 0; // ingored
+	
+	newResourcePool = resourcePool.createResourcePool(name, resourceConfigSpec);
+}]]></script>
+    <in-binding>
+      <bind name="resourcePool" type="VC:ResourcePool" export-name="resourcePool"/>
+      <bind name="name" type="string" export-name="name"/>
+      <bind name="cpuAllocationExpandableReservation" type="boolean" export-name="cpuAllocationExpandableReservation"/>
+      <bind name="cpuAllocationLimit" type="number" export-name="cpuAllocationLimit"/>
+      <bind name="cpuAllocationReservation" type="number" export-name="cpuAllocationReservation"/>
+      <bind name="cpuAllocationSharesLevel" type="VC:SharesLevel" export-name="cpuAllocationSharesLevel"/>
+      <bind name="cpuAllocationSharesShares" type="number" export-name="cpuAllocationSharesShares"/>
+      <bind name="memoryAllocationExpandableReservation" type="boolean" export-name="memoryAllocationExpandableReservation"/>
+      <bind name="memoryAllocationLimit" type="number" export-name="memoryAllocationLimit"/>
+      <bind name="memoryAllocationReservation" type="number" export-name="memoryAllocationReservation"/>
+      <bind name="memoryAllocationSharesLevel" type="VC:SharesLevel" export-name="memoryAllocationSharesLevel"/>
+      <bind name="memoryAllocationSharesShares" type="number" export-name="memoryAllocationSharesShares"/>
+    </in-binding>
+    <out-binding>
+      <bind name="newResourcePool" type="VC:ResourcePool" export-name="newResourcePool"/>
+    </out-binding>
+    <position y="100.0" x="140.0"/>
+  </workflow-item>
+  <presentation>
+    <p-step>
+      <title><![CDATA[General informations]]></title>
+      <p-param name="resourcePool">
+        <desc><![CDATA[Parent resource pool folder]]></desc>
+        <p-qual name="show-select-as"><![CDATA[tree]]></p-qual>
+        <p-qual name="contextualParameter"><![CDATA[]]></p-qual>
+        <p-qual name="mandatory"><![CDATA[true]]></p-qual>
+      </p-param>
+      <p-param name="name">
+        <desc><![CDATA[Name of new resource pool]]></desc>
+        <p-qual name="mandatory"><![CDATA[true]]></p-qual>
+        <p-qual name="minStringLength"><![CDATA[1.0]]></p-qual>
+      </p-param>
+    </p-step>
+    <p-step>
+      <title><![CDATA[CPU Allocation]]></title>
+      <p-param name="cpuAllocationExpandableReservation">
+        <desc><![CDATA[Can the reservation grow beyond the specified value?]]></desc>
+        <p-qual name="defaultValue"><![CDATA[S|boolean|true]]></p-qual>
+      </p-param>
+      <p-param name="cpuAllocationLimit">
+        <desc><![CDATA[Utilization limit (Set to -1 to disable)]]></desc>
+        <p-qual name="minNumberValue"><![CDATA[-1.0]]></p-qual>
+        <p-qual name="defaultValue"><![CDATA[S|number|-1.0]]></p-qual>
+        <p-qual name="numberFormat"><![CDATA[#]]></p-qual>
+      </p-param>
+      <p-param name="cpuAllocationReservation">
+        <desc><![CDATA[Resource reservation (Set to 0 to disable)]]></desc>
+        <p-qual name="minNumberValue"><![CDATA[0.0]]></p-qual>
+        <p-qual name="numberFormat"><![CDATA[#]]></p-qual>
+        <p-qual name="defaultValue"><![CDATA[S|number|0]]></p-qual>
+      </p-param>
+      <p-group>
+        <title><![CDATA[Shares]]></title>
+        <desc><![CDATA[Information abouts shares. Shares value is only used if share level is custom.]]></desc>
+        <p-param name="cpuAllocationSharesLevel">
+          <desc><![CDATA[The allocation level (Normal by default)]]></desc>
+        </p-param>
+        <p-param name="cpuAllocationSharesShares">
+          <desc><![CDATA[The number of shares allocated]]></desc>
+          <p-qual name="minNumberValue"><![CDATA[0.0]]></p-qual>
+          <p-qual name="numberFormat"><![CDATA[#]]></p-qual>
+          <p-qual name="defaultValue"><![CDATA[S|number|0]]></p-qual>
+        </p-param>
+      </p-group>
+    </p-step>
+    <p-step>
+      <title><![CDATA[Memory allocation]]></title>
+      <p-param name="memoryAllocationExpandableReservation">
+        <desc><![CDATA[Can the reservation grow beyond the specified value?]]></desc>
+        <p-qual name="defaultValue"><![CDATA[S|boolean|true]]></p-qual>
+      </p-param>
+      <p-param name="memoryAllocationLimit">
+        <desc><![CDATA[Utilization limit (Set to -1 to disable)]]></desc>
+        <p-qual name="minNumberValue"><![CDATA[-1.0]]></p-qual>
+        <p-qual name="defaultValue"><![CDATA[S|number|-1.0]]></p-qual>
+        <p-qual name="numberFormat"><![CDATA[#]]></p-qual>
+      </p-param>
+      <p-param name="memoryAllocationReservation">
+        <desc><![CDATA[Resource reservation (Set to -1 to disable)]]></desc>
+        <p-qual name="minNumberValue"><![CDATA[0.0]]></p-qual>
+        <p-qual name="defaultValue"><![CDATA[S|number|0]]></p-qual>
+        <p-qual name="numberFormat"><![CDATA[#]]></p-qual>
+      </p-param>
+      <p-group>
+        <title><![CDATA[Shares]]></title>
+        <desc><![CDATA[Information abouts shares. Shares value is only used if share level is custom.]]></desc>
+        <p-param name="memoryAllocationSharesLevel">
+          <desc><![CDATA[The allocation level (Normal by default)]]></desc>
+        </p-param>
+        <p-param name="memoryAllocationSharesShares">
+          <desc><![CDATA[The number of shares allocated]]></desc>
+          <p-qual name="minNumberValue"><![CDATA[0.0]]></p-qual>
+          <p-qual name="numberFormat"><![CDATA[#]]></p-qual>
+          <p-qual name="defaultValue"><![CDATA[S|number|0]]></p-qual>
+        </p-param>
+      </p-group>
+    </p-step>
+  </presentation>
+</workflow>

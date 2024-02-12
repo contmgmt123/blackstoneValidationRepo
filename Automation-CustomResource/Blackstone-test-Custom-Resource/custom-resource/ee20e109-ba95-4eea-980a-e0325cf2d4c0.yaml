@@ -1,0 +1,90 @@
+id: ee20e109-ba95-4eea-980a-e0325cf2d4c0
+displayName: Blackstone-test-Custom-Resource
+description: ''
+resourceType: Custom.custom.blackstone.resrource
+externalType: VC:ResourcePool
+status: RELEASED
+orgId: 7bb4d8c3-a407-4f4e-9709-f17126cb3812
+mainActions:
+  create:
+    id: BD808080808080808080808080808080C7C280800122528313869552e41805bb1
+    name: Create resource pool
+    description: "Creates a resource pool with the default CPU and memory allocation\
+      \ values. \nTo create a resource pool in a cluster, the cluster must have VMware\
+      \ DRS enabled."
+    type: vro.workflow
+    inputParameters:
+    - type: VC:ResourcePool
+      name: resourcePool
+      description: Parent resource pool folder
+    - type: string
+      name: name
+      description: Name of new resource pool
+    outputParameters:
+    - type: VC:ResourcePool
+      name: newResourcePool
+      description: The newly created resource pool
+    endpointLink: /resources/endpoints/ec3cb252-227d-4642-a241-eeb357ba637a
+  delete:
+    id: BD80808080808080808080808080808020C280800122528313869552e41805bb1
+    name: Delete resource pool
+    description: Deletes a resource pool and waits for the task to complete.
+    type: vro.workflow
+    inputParameters:
+    - type: VC:ResourcePool
+      name: resourcePool
+      description: Resource pool to delete
+    endpointLink: /resources/endpoints/ec3cb252-227d-4642-a241-eeb357ba637a
+additionalActions: [
+  ]
+properties:
+  type: object
+  properties:
+    name:
+      type: string
+      title: Name of new resource pool
+      minLength: 1
+    resourcePool:
+      type: object
+      title: Parent resource pool folder
+      properties:
+        id:
+          type: string
+          title: Reference object identifier
+        type:
+          type: string
+          title: Reference object type
+      $data: vro/data/inventory/VC:ResourcePool
+    newResourcePool:
+      type: object
+      properties:
+        id:
+          type: string
+          title: id
+        name:
+          type: string
+          title: name
+        type:
+          type: string
+          title: type
+        sdkId:
+          type: string
+          title: sdkId
+        vimId:
+          type: string
+          title: vimId
+        vimType:
+          type: string
+          title: vimType
+        cpuReservation:
+          type: string
+          title: cpuReservation
+        memoryReservation:
+          type: string
+          title: memoryReservation
+      computed: true
+  required:
+  - name
+  - resourcePool
+schemaType: VRO_INVENTORY
+organizationName: lcm-57-15
